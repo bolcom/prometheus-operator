@@ -104,6 +104,16 @@ type PrometheusSpec struct {
 	// EvaluationInterval string                    `json:"evaluationInterval"`
 	// Remote          RemoteSpec                 `json:"remote"`
 	// Sharding...
+	RemoteWriteEndpoints []RemoteWriteEndpoints `json:"remoteWrite,omitempty"`
+	RemoteReadEndpoints  []RemoteReadEndpoints  `json:"remoteRead,omitempty"`
+}
+
+type RemoteReadEndpoints struct {
+	Url string `json:"url"`
+}
+
+type RemoteWriteEndpoints struct {
+	Url string `json:"url"`
 }
 
 // Most recent observed status of the Prometheus cluster. Read-only. Not
