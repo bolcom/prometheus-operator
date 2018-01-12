@@ -320,6 +320,27 @@ func generateServiceMonitorConfig(version semver.Version, m *v1.ServiceMonitor, 
 			{Key: "source_labels", Value: []string{"__meta_kubernetes_service_name"}},
 			{Key: "target_label", Value: "service"},
 		},
+		// Lets push some basic kubernetes service labels into into prometheus
+		yaml.MapSlice{
+			{Key: "source_labels", Value: []string{"__meta_kubernetes_service_label_bol_application"}},
+			{Key: "action", Value: "replace"},
+			{Key: "target_label", Value: "bol_application"},
+		},
+		yaml.MapSlice{
+			{Key: "source_labels", Value: []string{"__meta_kubernetes_service_label_bol_role"}},
+			{Key: "action", Value: "replace"},
+			{Key: "target_label", Value: "bol_role"},
+		},
+		yaml.MapSlice{
+			{Key: "source_labels", Value: []string{"__meta_kubernetes_service_label_bol_opex"}},
+			{Key: "action", Value: "replace"},
+			{Key: "target_label", Value: "bol_opex"},
+		},
+		yaml.MapSlice{
+			{Key: "source_labels", Value: []string{"__meta_kubernetes_service_label_bol_environment"}},
+			{Key: "action", Value: "replace"},
+			{Key: "target_label", Value: "bol_environment"},
+		},
 	}...)
 
 	// By default, generate a safe job name from the service name.  We also keep
